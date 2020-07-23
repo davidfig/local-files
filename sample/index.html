@@ -1,0 +1,27 @@
+<head>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="title">Example for <a href="https://github.com/davidfig/local-files.git/">github.com/davidfig/local-files/</a></div>
+    <div class="contents">Contents of local-files server:</button>
+    <div class="files"></div>
+    <div class="file-results"></div>
+    <script type="module">
+        import * as localFiles from './localFiles.js'
+
+        const $ = query => document.querySelector(query)
+        const dir = async () => {
+            const files = await localFiles.dir()
+            files.forEach(file => {
+                const button = document.createElement('button')
+                button.innerHTML = file
+                button.addEventListener('click', async e => {
+                    const data = await localFiles.loadJson(e.currentTarget.innerText)
+                    $('.file-results').innerHTML = data.type
+                })
+                $('.files').appendChild(button)
+            })
+        }
+        dir()
+    </script>
+</body>
