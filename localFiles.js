@@ -50,7 +50,7 @@ export async function loadJson(filename)
  */
 export async function saveJson(filename, data)
 {
-    return await _post('upload', { filename, json })
+    return await _post('upload', { filename, data })
 }
 
 /**
@@ -71,7 +71,22 @@ export async function unlink(filename)
     return await _post('unlink', { filename })
 }
 
+/**
+ * renames a file
+ * @param {string} oldFilename
+ * @param {string} newFilename
+ */
 export async function rename(oldFilename, newFilename)
 {
     return await _post('rename', { oldFilename, newFilename })
+}
+
+/**
+ * returns fs.stat results for filename
+ * @param {string} filename
+ * @returns {Stats}
+ */
+export async function stat(filename)
+{
+    return await _post('stat', { filename })
 }
