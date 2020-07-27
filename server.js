@@ -17,7 +17,7 @@ module.exports = function(options={})
     {
         const resolveFilename = (filename = '') => path.join(process.cwd(), directory, filename)
         const log = s => { if (options.log) console.log(s) }
-
+        const error = s => { if (options.error) console.warn(s) }
         const app = express()
         app.use(cors())
 
@@ -40,6 +40,7 @@ module.exports = function(options={})
             }
             catch (e)
             {
+                error(`Error downloading ${req.body.filename}: ${e.message}`)
                 res.json({ error: e.message })
             }
         })
@@ -47,12 +48,13 @@ module.exports = function(options={})
         {
             try
             {
-                await fs.writeJSON(resolveFilename(req.body.filename), req.body.json)
+                await fs.writeJSON(resolveFilename(req.body.filename), req.body.data)
                 res.json({})
                 log(`Uploaded ${req.body.filename}.`)
             }
             catch (e)
             {
+                error(`Error uploading ${req.body.filename}: ${e.message}`)
                 res.json({ error: e.message })
             }
         })
@@ -66,6 +68,7 @@ module.exports = function(options={})
             }
             catch (e)
             {
+                error(`Error checking if ${req.body.filename} exists: ${e.message}`)
                 res.json({ error: e.message })
             }
         })
@@ -79,6 +82,7 @@ module.exports = function(options={})
             }
             catch (e)
             {
+                error(`Error renaming ${req.body.oldFilename} to ${req.body.newFilename}: ${e.message}`)
                 res.json({ error: e.message })
             }
         })
@@ -92,6 +96,7 @@ module.exports = function(options={})
             }
             catch (e)
             {
+                error(`Error unlinking ${req.body.filename}: ${e.message}`)
                 res.json({ error: e.message })
             }
         })
@@ -103,6 +108,7 @@ module.exports = function(options={})
             }
             catch (e)
             {
+                error(`Error checking stat of ${req.body.filename}: ${e.message}`)
                 res.json({ error: e.message })
             }
         })
