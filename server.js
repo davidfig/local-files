@@ -15,7 +15,7 @@ module.exports = function(options={})
 {
     return new Promise(resolve =>
     {
-        const resolveFilename = (filename = '') => path.join(process.cwd(), directory, filename)
+        const resolveFilename = (filename = '') => path.join(directory, filename)
         const log = s => { if (options.log) console.log(s) }
         const error = s => { if (options.error) console.warn(s) }
         const app = express()
