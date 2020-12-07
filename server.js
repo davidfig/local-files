@@ -29,6 +29,7 @@ module.exports = function(options={})
             res.json(results)
         })
 
+        app.use(express.json({limit: '500mb'}))
         app.use(bodyParser.json())
         app.post('/download', async (req, res) =>
         {
