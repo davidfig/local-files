@@ -1,6 +1,6 @@
 {
   "name": "local-files",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A local file server to allow webapps to access local directories and files",
   "main": "localFilesServer.js",
   "browser": "localFiles.js",
