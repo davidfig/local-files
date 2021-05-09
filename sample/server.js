@@ -1,12 +1,10 @@
-const express = require('express')
-const path = require('path')
-const localFiles = require('../server')
+import express from 'express'
+import { localFilesServer } from 'local-files'
 
 const HTML_PORT = 8090
 
-localFiles({ directory: 'sample/files'})
+localFilesServer({ directory: 'src' })
 
 const app = express()
-
-app.use(express.static('sample'))
-app.listen(HTML_PORT, () => console.log(`HTML server Listening on ${HTML_PORT}`))
+app.use(express.static('.'))
+app.listen(HTML_PORT, () => console.log(`HTML server Listening on http://localhost:${HTML_PORT}/sample/ (open browser here)`))
