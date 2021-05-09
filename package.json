@@ -1,6 +1,6 @@
 {
   "name": "local-files",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A local file server to allow webapps to access local directories and files",
   "main": "localFilesServer.js",
   "browser": "localFiles.js",
@@ -16,7 +16,8 @@
   "bin": "cli.js",
   "author": "David Figatner (david@yopeyopey.com)",
   "files": [
-    "dist"
+    "localFiles*.*",
+    "cli*.*"
   ],
   "license": "MIT",
   "dependencies": {
