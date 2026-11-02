@@ -7,10 +7,14 @@
     "inlineSources": true,
     "declaration": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "rootDir": "src",
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "."
+    "outDir": ".",
+    "useUnknownInCatchVariables": false,
+    "skipLibCheck": true
   },
   "files": [
     "src/localFiles.ts",
