@@ -1,6 +1,6 @@
 {
   "name": "local-files",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "A local file server to allow webapps to access local directories and files",
   "main": "localFilesServer.js",
   "browser": "localFiles.js",
@@ -8,6 +8,7 @@
   "scripts": {
     "start": "npm run build && npm run run",
     "build": "tsc",
+    "test": "npm run build && node --test --test-force-exit test/server.test.js",
     "run": "node sample/server",
     "run-bundled": "esbuild sample-bundled/client.js --bundle --outfile=sample-bundled/index.js && node sample-bundled/server",
     "watch": "tsc -w",
