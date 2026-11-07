@@ -4,6 +4,7 @@ export interface LocalFilesOptions {
     log?: false | ((...data: any[]) => void);
     error?: false | ((...data: any[]) => void);
     limit?: string;
+    allowedOrigins?: string[];
 }
 /**
  * create a localFiles server
@@ -13,5 +14,6 @@ export interface LocalFilesOptions {
  * @param {Function} [userOptions.log=console.log] log output (if null then uses console.log, if false turns off logging)
  * @param {Function} [userOptions.error=console.error] log error (if null then uses console.error, if false turns off error logging)
  * @param {string} [userOptions.limit="500mb"] limit for size of files served
+ * @param {string[]} [userOptions.allowedOrigins] web page origins to allow besides localhost (e.g., ['http://my-app.test:3000'])
  */
 export declare function localFilesServer(userOptions?: LocalFilesOptions): Promise<void>;

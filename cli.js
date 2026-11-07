@@ -11,7 +11,7 @@ function arg(name) {
 function start() {
     console.log(process.argv);
     if (process.argv[2] === '--help') {
-        console.log('localFilesServer <directory="."> <port=9988> <limit=100mb>');
+        console.log('localFilesServer <directory="."> <port=9988> <limit=100mb> <origins=http://my-app.test:3000,...>');
         process.exit(0);
     }
     else {
@@ -27,6 +27,10 @@ function start() {
         const limit = arg('limit');
         if (limit) {
             options.limit = limit;
+        }
+        const origins = arg('origins');
+        if (origins) {
+            options.allowedOrigins = origins.split(',');
         }
         localFilesServer(options);
     }

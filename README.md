@@ -26,6 +26,16 @@ You will need to clone this repository to see the full example. Here are the ins
 
 See sample directory for a simple file listing and content loading.
 
+## Security
+
+The server can read, change and delete files, so it only accepts requests from this machine:
+
+* It listens on 127.0.0.1, so other machines can't reach it.
+* Web pages can only use it if they're served from localhost, 127.0.0.1 or [::1], on any port. Use `allowedOrigins` to add others, such as a custom development hostname. Other pages get a 403 and the request doesn't run.
+* Only files inside `directory` are available. Paths that leave it return an error. Symbolic links inside `directory` are followed, so don't add links to anything you don't want served.
+
+Any program on your machine can still reach the server, including every page served from localhost, so only run it while you need it.
+
 ## Documentation
 
 ### CLI
@@ -35,7 +45,7 @@ See sample directory for a simple file listing and content loading.
 `local-files --help` presents the help
 
 Usage:
-`local-files <directory="."> <port=9988> <limit=100mb>` will set up the server.
+`local-files <directory="."> <port=9988> <limit=100mb> <origins=http://my-app.test:3000,...>` will set up the server.
 
 Either way, use the same client as below to access the hosted files.
 
@@ -51,6 +61,7 @@ import { localFilesServer }from 'local-files'
  * @param {Function} [userOptions.log=console.log] log output (if null then uses console.log, if false turns off logging)
  * @param {Function} [userOptions.error=console.error] log error (if null then uses console.error, if false turns off error logging)
  * @param {string} [userOptions.limit="500mb"] limit for size of files served
+ * @param {string[]} [userOptions.allowedOrigins] web page origins to allow besides localhost (e.g., ['http://my-app.test:3000'])
  */
 export function localFiles(userOptions: Partial<LocalFilesOptions> = {}): Promise<void>
 
